@@ -48,11 +48,16 @@ def submit(payload: dict) -> None:
         method="POST",
     )
     with request.urlopen(req) as resp:
+        status = resp.status
         response_body = resp.read().decode("utf-8")
-        print(f"Status: {resp.status}")
-        print(response_body)
-        with open("response.json", "w", encoding="utf-8") as f:
-            f.write(response_body)
+
+    print(f"Status: {status}")
+    print(response_body)
+
+    summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
+    if summary_path:
+        with open(summary_path, "a", encoding="utf-8") as f:
+            f.write(f"## B12 submission response\n\nStatus: `{status}`\n\n```json\n{response_body}\n```\n")
 
 
 if __name__ == "__main__":
