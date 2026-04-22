@@ -1,0 +1,23 @@
+name: Sam B12 Application
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Submit application
+        env:
+          APPLICANT_NAME: ${{ secrets.APPLICANT_NAME }}
+          APPLICANT_EMAIL: ${{ secrets.APPLICANT_EMAIL }}
+          RESUME_LINK: ${{ secrets.RESUME_LINK }}
+        run: python submit.py
