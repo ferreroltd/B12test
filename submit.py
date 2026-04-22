@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 from urllib import request
 
 SUBMISSION_URL = "https://b12.io/apply/submission"
-SIGNING_SECRET = b"AlsoAppliedToWebPleaseHireMeB12"
+SIGNING_SECRET = b"hello-there-from-b12"
 
 
 def iso_timestamp() -> str:
