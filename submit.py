@@ -48,8 +48,11 @@ def submit(payload: dict) -> None:
         method="POST",
     )
     with request.urlopen(req) as resp:
+        response_body = resp.read().decode("utf-8")
         print(f"Status: {resp.status}")
-        print(resp.read().decode("utf-8"))
+        print(response_body)
+        with open("response.json", "w", encoding="utf-8") as f:
+            f.write(response_body)
 
 
 if __name__ == "__main__":
